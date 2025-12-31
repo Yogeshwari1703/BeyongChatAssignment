@@ -1,0 +1,54 @@
+const Article = require("../models/Article");
+
+// GET all articles
+exports.getAllArticles = async (req, res) => {
+  try {
+    const articles = await Article.find().sort({ publishedAt: 1 }); // oldest first
+    res.json(articles);
+  } catch (error) {
+    res.status(500).json({ message: "Failed to fetch articles", error: error.message });
+  }
+};
+
+// GET single article by ID
+exports.getArticleById = async (req, res) => {
+  try {
+    const article = await Article.findById(req.params.id);
+    if (!article) return res.status(404).json({ message: "Article not found" });
+    res.json(article);
+  } catch (error) {
+    res.status(500).json({ message: "Failed to fetch article", error: error.message });
+  }
+};
+
+// CREATE article
+exports.createArticle = async (req, res) => {
+  try {
+    const article = await Article.create(req.body);
+    res.status(201).json(article);
+  } catch (error) {
+    res.status(500).json({ message: "Failed to create article", error: error.message });
+  }
+};
+
+// UPDATE article
+exports.updateArticle = async (req, res) => {
+  try {
+    const updated = await Article.findByIdAndUpdate(req.params.id, req.body, { new: true });
+    if (!updated) return res.status(404).json({ message: "Article not found" });
+    res.json(updated);
+  } catch (error) {
+    res.status(500).json({ message: "Failed to update article", error: error.message });
+  }
+};
+
+// DELETE article
+exports.deleteArticle = async (req, res) => {
+  try {
+    const deleted = await Article.findByIdAndDelete(req.params.id);
+    if (!deleted) return res.status(404).json({ message: "Article not found" });
+    res.json({ message: "Article deleted successfully" });
+  } catch (error) {
+    res.status(500).json({ message: "Failed to delete article", error: error.message });
+  }
+};
