@@ -58,8 +58,8 @@ src/
 ├── routes/
 │   └── article.routes.js   # API routes
 │
-├── controllers/  # API routes/
-│   └── articleController.js   # API routes
+├── controllers/  
+│   └── articleController.js   
 │
 ├── models/
 │   └── Article.js          # Mongoose schema
@@ -224,4 +224,5 @@ Backend | AI | Web Development
 This project is for **educational and research purposes only**.
 
 ---
+
 
