@@ -7,7 +7,7 @@ export default function ArticlesPage() {
 
   useEffect(() => {
     axios
-      .get("http://localhost:5000/api/articles")
+      .get("https://beyongchatassignment-3.onrender.com/api/articles")
       .then((res) => setArticles(res.data))
       .catch(console.error);
   }, []);
